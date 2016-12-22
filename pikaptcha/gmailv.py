@@ -36,10 +36,10 @@ def proc_mail(M):
                         print "Unable to verify email.\n"
                         M.store(num,'+X-GM-LABELS', '\\Trash')
 
-def email_verify(plusmail, googlepass):
+def email_verify(gmail, googlepass):
     time.sleep(5)
     #Waiting 5 seconds before checking email
-    email_address = plusmail
+    email_address = gmail
     M = imaplib.IMAP4_SSL('imap.gmail.com')    
     try:
         M.login(email_address, googlepass)

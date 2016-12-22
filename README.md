@@ -129,7 +129,8 @@ You can type `pikaptcha --help` to see all parameters. Optional parameters are a
 	--username, -u #This is the username
 	--password, -p #This is the password
 	--email, -e #This is the email
-	--plusmail, -m #Suppose your gmail address is test@gmail.com. If you use -m test@gmail.com, this will activate the plusmail trick
+	--plusmail, -m #The email to be filled in registration form.  Suppose your gmail address is test@gmail.com. If you use -m test@gmail.com, this will activate the plusmail trick
+	--gmail, -g # the gmail address for autoverify
 	--count, -c #This is the number of accounts to make
 	--recaptcha, -r #This is your 2captcha key
 	--autoverify, -av #Set this to True if you want to autoverify emails. Otherwise False (or don't use the tag)
@@ -258,7 +259,12 @@ Example 18 : Use private proxy with authentication when accepting the Terms of S
 ```
 pikaptcha -px https://user:password@1.1.1.1:1
 ```
-	  
+
+Example 19 : Create 5 accounts using the plusmail trick with gmail verification and manual captcha solving.
+```
+pikaptcha -c 5 -m emailaddress@gmail.com -av True -g emailaddress@gmail.com -gp GoOgLePaSs
+```
+
 ## Common Issues
 If you are still having troubles, you can join us at [discord channel](https://discord.gg/PfX5B7F) https://discord.gg/PfX5B7F
 Please let us know what your issue is, instead of just saying it doesnt work. Copying the error code you receive is very helpful.

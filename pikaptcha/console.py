@@ -44,6 +44,10 @@ def parse_arguments(args):
         help='Email template for the new account. Use something like aaaa@gmail.com (defaults to nothing).'
     )
     parser.add_argument(
+        '-g', '--gmail', type=str, default=None,
+        help='gmail account. Use something like aaaa@gmail.com (defaults to nothing).'
+    )
+    parser.add_argument(
         '-av', '--autoverify', type=bool, default=False,
         help='Append the argument -av True if you want to use autoverify with +mail.'
     )
@@ -97,6 +101,8 @@ def parse_arguments(args):
 def _verify_autoverify_email(settings):
     if (settings['args'].autoverify == True and settings['args'].plusmail == None):
         raise PTCInvalidEmailException("You have to specify a plusmail (--plusmail or -m) to use autoverification.")
+    if (settings['args'].autoverify == True and settings['args'].gmail == None):
+        raise PTCInvalidEmailException("You have to specify a gmail (--gmail or -g) to use autoverification.")
     if (settings['args'].autoverify == True and settings['args'].googlepass == None):
         raise PTCInvalidEmailException("You have to specify a googlepass (--googlepass or -gp) to use autoverification.")
 
@@ -142,7 +148,7 @@ def entry():
     if _verify_settings({'args':args, 'balance':captchabal}):
         if (args.autoverify == True):
             with open(args.textfile, "a") as ulist:
-                ulist.write("The following accounts use the email address: " + args.plusmail + "\n")
+                ulist.write("The following accounts use the email address: " + args.gmail + "\n")
                 ulist.close()
         for x in range(0,args.count):
             print("Making account #" + str(x+1))
@@ -167,7 +173,7 @@ def entry():
         
                     # Verify email
                     if (args.autoverify == True):
-                        email_verify(args.plusmail, args.googlepass)
+                        email_verify(args.gmail, args.googlepass)
                     
                     # Append usernames 
                     with open(args.textfile, "a") as ulist:
